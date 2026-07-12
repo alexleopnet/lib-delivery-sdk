@@ -24,4 +24,8 @@ interface PayseraDeliverySettingsInterface
     public function getUserAgent(): string;
 
     public function isSinglePerOrderShipmentEnabled(): bool;
+
+    public function isServerPackingEnabled(): bool;
+
+    public function getPackingSlackPercent(): int;
 }

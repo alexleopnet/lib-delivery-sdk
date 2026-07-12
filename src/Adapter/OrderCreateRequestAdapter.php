@@ -57,6 +57,14 @@ class OrderCreateRequestAdapter
             ->setTestMode($orderDto->isTestMode())
         ;
 
+        $settings = $request->getDeliverySettings();
+        if ($settings->isServerPackingEnabled() && !$settings->isSinglePerOrderShipmentEnabled()) {
+            $order
+                ->setPackingEnabled(true)
+                ->setSlackPercent($settings->getPackingSlackPercent())
+            ;
+        }
+
         $projectId = $request->getDeliverySettings()->getResolvedProjectId();
 
         if ($projectId !== null) {

@@ -162,4 +162,57 @@ class OrderCreateRequestAdapterTest extends TestCase
         $this->assertNull($order->getProjectId());
         $this->assertNull($order->getOrderNotification());
     }
+
+    public function testConvertWithServerPackingSetsPackingFlags(): void
+    {
+        $this->requestMock->method('getOrder')->willReturn($this->merchantOrderMock);
+        $this->requestMock->method('getDeliverySettings')->willReturn($this->deliverySettingsMock);
+
+        $this->merchantOrderMock->method('getItems')->willReturn(new OrderItemsCollection());
+        $this->merchantOrderMock
+            ->method('getShipping')
+            ->willReturn($this->createMock(MerchantOrderPartyInterface::class));
+        $this->merchantOrderMock->method('getDeliveryGateway')->willReturn($this->deliveryGatewayMock);
+        $this->merchantOrderMock->method('getNumber')->willReturn('ORDER123');
+        $this->deliveryGatewayMock->method('getSettings')->willReturn($this->deliveryGatewaySettingsMock);
+        $this->deliveryGatewayMock->method('getCode')->willReturn('gatewayCode');
+
+        $this->deliverySettingsMock->method('isSinglePerOrderShipmentEnabled')->willReturn(false);
+        $this->deliverySettingsMock->method('isServerPackingEnabled')->willReturn(true);
+        $this->deliverySettingsMock->method('getPackingSlackPercent')->willReturn(5);
+
+        $this->shipmentsAdapterMock->method('convert')->willReturn([new ShipmentCreate()]);
+        $this->shipmentPointAdapterMock->method('convert')->willReturn(new ShipmentPointCreate());
+
+        $order = $this->orderCreateRequestAdapter->convert($this->requestMock);
+
+        $this->assertTrue($order->getPackingEnabled());
+        $this->assertSame(5, $order->getSlackPercent());
+    }
+
+    public function testConvertWithoutServerPackingLeavesPackingFlagsUnset(): void
+    {
+        $this->requestMock->method('getOrder')->willReturn($this->merchantOrderMock);
+        $this->requestMock->method('getDeliverySettings')->willReturn($this->deliverySettingsMock);
+
+        $this->merchantOrderMock->method('getItems')->willReturn(new OrderItemsCollection());
+        $this->merchantOrderMock
+            ->method('getShipping')
+            ->willReturn($this->createMock(MerchantOrderPartyInterface::class));
+        $this->merchantOrderMock->method('getDeliveryGateway')->willReturn($this->deliveryGatewayMock);
+        $this->merchantOrderMock->method('getNumber')->willReturn('ORDER123');
+        $this->deliveryGatewayMock->method('getSettings')->willReturn($this->deliveryGatewaySettingsMock);
+        $this->deliveryGatewayMock->method('getCode')->willReturn('gatewayCode');
+
+        $this->deliverySettingsMock->method('isSinglePerOrderShipmentEnabled')->willReturn(false);
+        $this->deliverySettingsMock->method('isServerPackingEnabled')->willReturn(false);
+
+        $this->shipmentsAdapterMock->method('convert')->willReturn([new ShipmentCreate()]);
+        $this->shipmentPointAdapterMock->method('convert')->willReturn(new ShipmentPointCreate());
+
+        $order = $this->orderCreateRequestAdapter->convert($this->requestMock);
+
+        $this->assertNull($order->getPackingEnabled());
+        $this->assertNull($order->getSlackPercent());
+    }
 }
