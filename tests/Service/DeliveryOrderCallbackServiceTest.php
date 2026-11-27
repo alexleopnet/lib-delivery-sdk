@@ -43,6 +43,7 @@ class DeliveryOrderCallbackServiceTest extends TestCase
     private DeliveryGatewayRepositoryInterface $deliveryGatewayRepository;
     private DeliveryGatewayUtils $gatewayUtils;
     private MerchantOrderLoggerInterface $merchantOrderLogger;
+    private DeliveryTerminalLocationFactoryInterface $deliveryTerminalLocationFactory;
 
     protected function setUp(): void
     {

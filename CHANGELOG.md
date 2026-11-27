@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.1 - 2026-11-27
+- Added PHP 8.4 and PHP 8.5 support: made implicitly nullable parameters explicitly nullable
+
 ## 0.5.0 - 2026-05-05
 - Single-shipment-per-order now uses merchant default parcel size from settings instead of summing item dimensions
 - Added `getDefaultParcelWidth/Height/Length/Weight` to `PayseraDeliverySettingsInterface`

@@ -10,7 +10,7 @@ class RateLimitExceededException extends BaseException
 {
     private const MESSAGE = 'Rate limit exceeded. Too many validation attempts.';
     public function __construct(
-        Throwable $previous = null,
+        ?Throwable $previous = null,
         int $code = self::E_RATE_LIMIT_EXCEEDED
     ) {
         parent::__construct(self::MESSAGE, $code, $previous);
