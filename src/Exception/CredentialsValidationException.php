@@ -8,7 +8,7 @@ use Throwable;
 
 class CredentialsValidationException extends BaseException
 {
-    public function __construct(string $message, Throwable $previous = null)
+    public function __construct(string $message, ?Throwable $previous = null)
     {
         parent::__construct(
             $message,

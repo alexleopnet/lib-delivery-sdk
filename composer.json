@@ -27,12 +27,13 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.0.*",
-        "mockery/mockery": "^1.6",
+        "mockery/mockery": "^1.6.12",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "^9.6",
+        "paysera/lib-rest-client-common": "dev-php-8.5-support as 2.8.1"
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
@@ -49,5 +50,11 @@
         }
     },
     "prefer-stable": true,
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/alexleopnet/lib-rest-client-common"
+        }
+    ]
 }
