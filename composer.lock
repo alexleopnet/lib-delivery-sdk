@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "064047deee8e6ffcffed0de32cd9be7f",
+    "content-hash": "1dd888dd8ea52cf22189ed7985810375",
     "packages": [
         {
             "name": "evp/money",
@@ -570,16 +570,16 @@
         },
         {
             "name": "paysera/lib-rest-client-common",
-            "version": "2.7.1",
+            "version": "dev-php-8.5-support",
             "source": {
                 "type": "git",
-                "url": "https://github.com/paysera/lib-rest-client-common.git",
-                "reference": "57b581abba953ed8ac956035c1e937d0e9cef3ea"
+                "url": "https://github.com/alexleopnet/lib-rest-client-common.git",
+                "reference": "ab93a588132c9e240fe13e9c64babb050b01a0ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paysera/lib-rest-client-common/zipball/57b581abba953ed8ac956035c1e937d0e9cef3ea",
-                "reference": "57b581abba953ed8ac956035c1e937d0e9cef3ea",
+                "url": "https://api.github.com/repos/alexleopnet/lib-rest-client-common/zipball/ab93a588132c9e240fe13e9c64babb050b01a0ad",
+                "reference": "ab93a588132c9e240fe13e9c64babb050b01a0ad",
                 "shasum": ""
             },
             "require": {
@@ -599,13 +599,23 @@
                     "Paysera\\Component\\RestClientCommon\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Paysera\\Component\\RestClientCommon\\Tests\\": "tests"
+                }
+            },
+            "archive": {
+                "exclude": [
+                    ".docker",
+                    "docker-compose.yml",
+                    "LOCAL_DEPLOYMENT.md"
+                ]
+            },
             "description": "Base classes/helpers used in REST Clients",
             "support": {
-                "issues": "https://github.com/paysera/lib-rest-client-common/issues",
-                "source": "https://github.com/paysera/lib-rest-client-common/tree/2.7.1"
+                "source": "https://github.com/alexleopnet/lib-rest-client-common/tree/php-8.5-support"
             },
-            "time": "2025-03-17T09:53:44+00:00"
+            "time": "2026-11-27T21:51:39+00:00"
         },
         {
             "name": "psr/container",
@@ -5202,14 +5212,23 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "paysera/lib-rest-client-common",
+            "version": "dev-php-8.5-support",
+            "alias": "2.8.1",
+            "alias_normalized": "2.8.1.0"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "paysera/lib-rest-client-common": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.11.0"
+    "plugin-api-version": "2.6.0"
 }

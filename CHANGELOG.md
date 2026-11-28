@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed tests that failed on newer PHP versions: `DeliveryOrderCallbackServiceTest` no longer creates a dynamic property (deprecated since PHP 8.2), and `MerchantClientProviderTest` calls `ReflectionProperty::setAccessible()` only before PHP 8.1 (deprecated since PHP 8.5)
 - Added PHP 8.4 and PHP 8.5 to the CI test matrix, quoted the PHP versions so the `8.0` job runs on PHP 8.0, and turned off fail-fast so one failing job does not cancel the others
 - Raised the minimum `mockery/mockery` dev dependency to `^1.6.12`, the first release whose mocks are PHP 8.4 compatible
+- Tests run with `error_reporting=-1` (set in `phpunit.xml`), so a PHP deprecation notice fails the test suite even though the CI Docker image hides deprecations in its php.ini
 
 ## 0.5.0 - 2026-05-05
 - Single-shipment-per-order now uses merchant default parcel size from settings instead of summing item dimensions
